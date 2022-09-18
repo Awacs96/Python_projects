@@ -12,7 +12,7 @@ import random
 suits = ["Hearts", "Diamonds", "Spades", "Clubs"]
 ranks = ["Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten", "Jack", "Queen", "King", "Ace"]
 values = {"Two": 2, "Three": 3, "Four": 4, "Five": 5, "Six": 6, "Seven": 7, "Eight": 8, "Nine": 9, "Ten": 10, "Jack": 10, "Queen": 10, "King": 10, "Ace": 11}
-game_active = True
+playing = True
 
 class Card:
     
@@ -76,15 +76,66 @@ class Chips:
     def lose_bet(self):
         self.total -= self.bet
 
-def take_bet():
-    pass
+def take_bet(chips):
+    
+    while True:
+        try:
+            chips.bet = int(input("Please, place your bet.\n"))
+        except ValueError:
+            print("The bet value must be an integer.")
+        else:
+            if chips.bet > chips.total:
+                print("The bet cannot exceed ", chips.total)
+            else:
+                break
 
 def hit(deck, hand):
-    pass
+    hand.add_card(deck.deal())
+    hand.adjust_aces()
 
-test = Deck()
-test.shuffle()
-player = Hand()
-player.add_card(test.deal())
-player.add_card(test.deal())
-print(player.value)
+def hit_or_stand(deck, hand):
+    global playing
+
+    while True:
+        x = input("Do you want to hit (h), or stand (s)? ")
+
+        if x.lower() == "h":
+            hit(deck, hand)
+        elif x.lower() == "s":
+            print("Player stands.")
+            playing = False
+        else:
+            print("Unrecognized, please try again.")
+            continue
+        break
+
+def show_some(player, dealer):
+    print("\nDealer's hand:")
+    print(" Hidden Card ")
+    print(" ", dealer.cards[1])
+    print("\nPlayer's hand:", *player.cards, sep="\n")
+
+def show_all(player, dealer):
+    print("\nDealer's hand: ", *dealer.cards, sep="\n")
+    print("Dealer's hand value is ", dealer.value)
+    print("\nPlayer's hand: ", *player.cards, sep="\n")
+    print("Player's hand value is ", player.value)
+
+def player_busts(player, dealer, chips):
+    print("Player busted!")
+    chips.lose_bet
+
+def player_wins(player, dealer, chips):
+    print("Player wins!")
+    chips.win_bet
+
+def dealer_busts(player, dealer, chips):
+    print("Dealer busted!")
+    chips.win_bet
+
+def dealer_wins(player, dealer, chips):
+    print("Dealer wins!")
+    chips.lose_bet
+
+def tie(player, dealer):
+    print("It's a tie!")
