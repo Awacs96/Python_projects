@@ -1,0 +1,4 @@
+September 2022:
+    - creating the game logic, for now with 52 cards (more functionality may be added later)
+    - implementing essential classes - Deck, Player
+    - implementation of the narrow game logic - splitting or double-down not implemented (may be added later)
