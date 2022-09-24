@@ -45,9 +45,9 @@ while True:
         else:
             tie(player_hand, dealer_hand)
         
-    print("Player's chips stand at ", player_chips.total)
+    print("\nPlayer's chips stand at ", player_chips.total)
 
-    new_game = input("Would you like to play another hand? Y/N")
+    new_game = input("Would you like to play another hand? Y/N\n")
 
     if new_game[0].lower() == "y":
         playing = True

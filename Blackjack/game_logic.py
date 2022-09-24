@@ -34,8 +34,10 @@ class Deck:
     
     def __str__(self):
         deck = ""
+
         for card in self.deck:
-            deck += "\n " + card.__str__()
+            deck += "\n" + card.__str__()
+
         return "The deck contains: " + deck
 
     def shuffle(self):
@@ -60,7 +62,7 @@ class Hand:
             self.aces += 1
 
     def adjust_aces(self):
-        while self.value > 21 and self.aces:
+        while self.value > 21 and self.aces > 0:
             self.value -= 10
             self.aces -= 1
 
@@ -81,11 +83,11 @@ def take_bet(chips):
     while True:
         try:
             chips.bet = int(input("Please, place your bet.\n"))
-        except ValueError:
+        except:
             print("The bet value must be an integer.")
         else:
             if chips.bet > chips.total:
-                print("The bet cannot exceed ", chips.total)
+                print("The bet cannot exceed yozr current amount of chips: ", chips.total)
             else:
                 break
 
@@ -97,15 +99,15 @@ def hit_or_stand(deck, hand):
     global playing
 
     while True:
-        x = input("Do you want to hit (h), or stand (s)? ")
+        x = input("Do you want to hit (h), or stand (s)?\n")
 
-        if x.lower() == "h":
+        if x[0].lower() == "h":
             hit(deck, hand)
-        elif x.lower() == "s":
+        elif x[0].lower() == "s":
             print("Player stands.")
             playing = False
         else:
-            print("Unrecognized, please try again.")
+            print("Unrecognized, please enter the command again.")
             continue
         break
 
@@ -123,19 +125,19 @@ def show_all(player, dealer):
 
 def player_busts(player, dealer, chips):
     print("Player busted!")
-    chips.lose_bet
+    chips.lose_bet()
 
 def player_wins(player, dealer, chips):
     print("Player wins!")
-    chips.win_bet
+    chips.win_bet()
 
 def dealer_busts(player, dealer, chips):
     print("Dealer busted!")
-    chips.win_bet
+    chips.win_bet()
 
 def dealer_wins(player, dealer, chips):
     print("Dealer wins!")
-    chips.lose_bet
+    chips.lose_bet()
 
 def tie(player, dealer):
     print("It's a tie!")
