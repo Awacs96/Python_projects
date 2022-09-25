@@ -25,4 +25,6 @@ def pc_guesser(upper_limit, remembers=True):
 
     print(f"The computer hit the correct number after {guesses} guesses. The number was: {rand}.")
 
+
+# Call the function with your upper limit value
 pc_guesser(10)
