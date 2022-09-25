@@ -3,35 +3,26 @@
 
 import random
 
-def makeTip(upper):
-    return random.randint(1, upper)
-
 def pc_guesser(upper_limit, remembers=True):
-    guesses = 0
+    guesses = 1
     memory = []
     rand = random.randint(1, upper_limit)
     pc_tip = random.randint(1, upper_limit)
 
     while pc_tip != rand:
+        guesses += 1
+        print(memory, pc_tip)
 
-        print(pc_tip)
+        if remembers == True:
+            memory.append(pc_tip)
 
-        if remembers == False:
-            pc_tip = makeTip(upper_limit)
-            guesses += 1
-            continue
+            while pc_tip in memory:
+                pc_tip = random.randint(1, upper_limit)
         else:
-            if pc_tip not in memory:
-                memory.append(pc_tip)
-                pc_tip = makeTip(upper_limit)
-                guesses += 1
-            else:
-                while pc_tip in memory:
-                    pc_tip = makeTip(upper_limit)
-                continue
+            pc_tip = random.randint(1, upper_limit)
+        
+        print("End loop guess: ", pc_tip)
 
-    
-    print(f"The computer hit the correct number after {pc_tip} guesses. The number was: {rand}.")
-
+    print(f"The computer hit the correct number after {guesses} guesses. The number was: {rand}.")
 
 pc_guesser(10)

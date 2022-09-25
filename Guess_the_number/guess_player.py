@@ -4,6 +4,9 @@ import random
 while True:
     try:
         upper_range = int(input("Chose the upper range of the guessing range: "))
+        if upper_range <= 1:
+            print("Please enter a valid integer greater than 1.")
+            continue
         break
     except:
         print("Please enter a valid integer.")
