@@ -28,24 +28,14 @@ while playing:
     player_full = getFullName(player[0].lower())
     computer_full = getFullName(computer[0].lower())
 
-    if player[0].lower() == "r" and computer == "p":
+    if ( player[0].lower() == "r" and computer == "p" ) or (  player[0].lower() == "p" and computer == "s" ) \
+        or ( player[0].lower() == "s" and computer == "r" ):
         print(f"You chose {player_full}, computer chose {computer_full}. Computer wins!")
         score_pc += 1
-    elif player[0].lower() == "r" and computer == "s":
+    elif ( player[0].lower() == "r" and computer == "s" ) or ( player[0].lower() == "s" and computer == "p" ) \
+        or ( player[0].lower() == "p" and computer == "r" ):
         print(f"You chose {player_full}, computer chose {computer_full}. Player wins!")
         score_player += 1
-    elif player[0].lower() == "p" and computer == "r":
-        print(f"You chose {player_full}, computer chose {computer_full}. Player wins!")
-        score_player += 1
-    elif player[0].lower() == "p" and computer == "s":
-        print(f"You chose {player_full}, computer chose {computer_full}. Computer wins!")
-        score_pc += 1
-    elif player[0].lower() == "s" and computer == "p":
-        print(f"You chose {player_full}, computer chose {computer_full}. Player wins!")
-        score_player += 1
-    elif player[0].lower() == "s" and computer == "r":
-        print(f"You chose {player_full}, computer chose {computer_full}. Computer wins!")
-        score_pc += 1
     else:
         print(f"You chose {player_full}, computer chose {computer_full}. It's a tie!")
     
